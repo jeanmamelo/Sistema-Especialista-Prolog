@@ -122,8 +122,190 @@ public class ControleCadastro {
                 tail = tail+", subFebril(2)";
             } 
         }
-        
-        
+        if(sintomas.get(2).equals("Sim, leve")){
+            if(cont == 0){
+                tail = tail+"dorArticulacao(leve)";
+                cont++;
+            }else{
+                tail = tail+", dorArticulacao(leve)";
+            } 
+        }
+        if(sintomas.get(2).equals("Sim, moderada")){
+            if(cont == 0){
+                tail = tail+"dorArticulacao(moderada)";
+                cont++;
+            }else{
+                tail = tail+", dorArticulacao(moderada)";
+            } 
+        }
+        if(sintomas.get(2).equals("Sim, intensa")){
+            if(cont == 0){
+                tail = tail+"dorArticulacao(intensa)";
+                cont++;
+            }else{
+                tail = tail+", dorArticulacao(intensa)";
+            } 
+        }
+        if(sintomas.get(3).equals("Sim, leve")){
+            if(cont == 0){
+                tail = tail+"inchacoArticulacao(leve)";
+                cont++;
+            }else{
+                tail = tail+", inchacoArticulacao(leve)";
+            } 
+        }
+        if(sintomas.get(3).equals("Sim, intensa")){
+            if(cont == 0){
+                tail = tail+"inchacoArticulacao(intensa)";
+                cont++;
+            }else{
+                tail = tail+", inchacoArticulacao(intensa)";
+            } 
+        }
+        if(sintomas.get(4).equals("Sim, leve")){
+            if(cont == 0){
+                tail = tail+"coceira(leve)";
+                cont++;
+            }else{
+                tail = tail+", coceira(leve)";
+            } 
+        }
+        if(sintomas.get(4).equals("Sim, moderada")){
+            if(cont == 0){
+                tail = tail+"coceira(moderada)";
+                cont++;
+            }else{
+                tail = tail+", coceira(moderada)";
+            } 
+        }
+        if(sintomas.get(4).equals("Sim, intensa")){
+            if(cont == 0){
+                tail = tail+"coceira(intensa)";
+                cont++;
+            }else{
+                tail = tail+", coceira(intensa)";
+            } 
+        }
+        if(sintomas.get(5).equals("Sim, leve")){
+            if(cont == 0){
+                tail = tail+"hipertrofia(leve)";
+                cont++;
+            }else{
+                tail = tail+", coceira(leve)";
+            } 
+        }
+        if(sintomas.get(5).equals("Sim, moderada")){
+            if(cont == 0){
+                tail = tail+"hipertrofia(moderada)";
+                cont++;
+            }else{
+                tail = tail+", coceira(moderada)";
+            } 
+        }
+        if(sintomas.get(5).equals("Sim, intensa")){
+            if(cont == 0){
+                tail = tail+"hipertrofia(intensa)";
+                cont++;
+            }else{
+                tail = tail+", coceira(intensa)";
+            } 
+        }
+        if(sintomas.get(6).equals("Sim, moderada")){
+            if(cont == 0){
+                tail = tail+"dorCabeca(moderada)";
+                cont++;
+            }else{
+                tail = tail+", dorCabeca(moderada)";
+            } 
+        }
+        if(sintomas.get(6).equals("Sim, intensa")){
+            if(cont == 0){
+                tail = tail+"dorCabeca(intensa)";
+                cont++;
+            }else{
+                tail = tail+", dorCabeca(intensa)";
+            } 
+        }
+        if(sintomas.get(7).equals("Sim")){
+            if(cont == 0){
+                tail = tail+"manchaPele";
+                cont++;
+            }else{
+                tail = tail+", manchaPele";
+            } 
+        }
+        if(sintomas.get(8).equals("Sim")){
+            if(cont == 0){
+                tail = tail+"dorCorpo";
+                cont++;
+            }else{
+                tail = tail+", dorCorpo";
+            } 
+        }
+        if(sintomas.get(9).equals("Sim")){
+            if(cont == 0){
+                tail = tail+"nauseaVomito";
+                cont++;
+            }else{
+                tail = tail+", nauseaVomito";
+            } 
+        }
+        if(sintomas.get(10).equals("Sim")){
+            if(cont == 0){
+                tail = tail+"dorMuscular";
+                cont++;
+            }else{
+                tail = tail+", dorMuscular";
+            } 
+        }
+        if(sintomas.get(11).equals("Sim")){
+            if(cont == 0){
+                tail = tail+"faltaApetite";
+                cont++;
+            }else{
+                tail = tail+", faltaApetite";
+            } 
+        }
+        if(sintomas.get(11).equals("Sim")){
+            if(cont == 0){
+                tail = tail+"conjutivite";
+                cont++;
+            }else{
+                tail = tail+", conjutivite";
+            } 
+        }
+        if(sintomas.get(12).equals("Sim")){
+            if(cont == 0){
+                tail = tail+"calafrios";
+                cont++;
+            }else{
+                tail = tail+", calafrios";
+            } 
+        }
+        if(sintomas.get(13).equals("Sim")){
+            if(cont == 0){
+                tail = tail+"tremor";
+                cont++;
+            }else{
+                tail = tail+", tremor";
+            } 
+        }
+        if(sintomas.get(14).equals("Sim")){
+            if(cont == 0){
+                tail = tail+"fadigaFraqueza";
+                cont++;
+            }else{
+                tail = tail+", fadigaFraqueza";
+            } 
+        }
+        if(sintomas.get(15).equals("Sim")){
+            if(cont == 0){
+                tail = tail+"sudorese";
+                cont++;
+            }else{
+                tail = tail+", sudorese";
+            } 
+        }
         tail = tail+"]";
         lista = "[null|"+tail+"]";
         return lista;
