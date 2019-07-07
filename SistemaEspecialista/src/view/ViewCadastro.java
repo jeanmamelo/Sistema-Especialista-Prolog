@@ -3,23 +3,25 @@ package view;
 import control.ControleCadastro;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import org.jpl7.Term;
 
 /**
  *
  * @author Eduardo
  */
 public class ViewCadastro extends javax.swing.JFrame {
+
     ControleCadastro controleCadastro = new ControleCadastro();
     ArrayList<String> sintomas = new ArrayList();
-    
-    
+    String diagnostico = "";
+
     public ViewCadastro() {
         initComponents();
     }
-    
-    public void getSintomas(){
-        
+
+    public void getSintomas() {
         sintomas.add(jComboBoxFebreDias.getSelectedItem().toString());
         sintomas.add(jComboBoxSubfebril.getSelectedItem().toString());
         sintomas.add(jComboBoxDorArticulacao.getSelectedItem().toString());
@@ -32,53 +34,54 @@ public class ViewCadastro extends javax.swing.JFrame {
         sintomas.add(jComboBoxNauseaVomito.getSelectedItem().toString());
         sintomas.add(jComboBoxDorMuscular.getSelectedItem().toString());
         sintomas.add(jComboBoxFaltaApetite.getSelectedItem().toString());
-        sintomas.add(jComboBoxConjuntivite.getSelectedItem().toString());        
+        sintomas.add(jComboBoxConjuntivite.getSelectedItem().toString());
         sintomas.add(jComboBoxCalafrios.getSelectedItem().toString());
         sintomas.add(jComboBoxTremores.getSelectedItem().toString());
-        sintomas.add(jComboBoxFadigaFraqueza.getSelectedItem().toString());   
-        sintomas.add(jComboBoxSudorese.getSelectedItem().toString());     
+        sintomas.add(jComboBoxFadigaFraqueza.getSelectedItem().toString());
+        sintomas.add(jComboBoxSudorese.getSelectedItem().toString());
     }
-    
+
     private void validaCampos() {
-                
-    if(verificaCampoNulo()){
-        JOptionPane.showMessageDialog(this, "Preencha todos os campos.", "Aviso", JOptionPane.WARNING_MESSAGE);
-    }else if (verificaEmail()){
-        JOptionPane.showMessageDialog(this, "Insira um email válido.", "Aviso", JOptionPane.WARNING_MESSAGE);
-    }else{
-        realizaCadastro();
+
+        if (verificaCampoNulo()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else if (verificaEmail()) {
+            JOptionPane.showMessageDialog(this, "Insira um email válido.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        } else {
+            realizaCadastro();
+        }
     }
-}
-    
-    public boolean verificaCampoNulo(){
-        return "".equals(jTextFieldNome.getText()) || "".equals(jTextFieldEndereco.getText())|| "".equals(jTextFieldCidade.getText())||  
-               "".equals(jTextFieldCelular.getText()) || "".equals(jTextFieldEmail.getText());
-}
-    public boolean verificaEmail(){
-    int cont = 0;
+
+    public boolean verificaCampoNulo() {
+        return "".equals(jTextFieldNome.getText()) || "".equals(jTextFieldEndereco.getText()) || "".equals(jTextFieldCidade.getText())
+                || "".equals(jTextFieldCelular.getText()) || "".equals(jTextFieldEmail.getText());
+    }
+
+    public boolean verificaEmail() {
+        int cont = 0;
         for (int j = 0; j < jTextFieldEmail.getText().length(); j++) {
             if (jTextFieldEmail.getText().charAt(j) == '@') {
                 cont++;
             }
         }
         return cont != 1;
-}
-    
-    public void realizaCadastro(){
-        
-    //controleCadastro.salvarCadastro(jTextFieldNome.getText(), jTextFieldEndereco.getText(), jTextFieldCidade.getText(), jTextFieldCelular.getText(), jTextFieldEmail.getText());
-    JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso.");
-                
-    this.dispose();
-    
-    jTextFieldNome.setText("");
-    jTextFieldEndereco.setText("");
-    jTextFieldCidade.setText("");
-    jTextFieldCelular.setText("");
-    jTextFieldEmail.setText("");
-    
-}
-    
+    }
+
+    public void realizaCadastro() {
+
+        controleCadastro.salvarCadastro(jTextFieldNome.getText(), jTextFieldEndereco.getText(), jTextFieldCidade.getText(), jTextFieldCelular.getText(), jTextFieldEmail.getText(), diagnostico);
+        JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso.");
+
+        this.dispose();
+
+        jTextFieldNome.setText("");
+        jTextFieldEndereco.setText("");
+        jTextFieldCidade.setText("");
+        jTextFieldCelular.setText("");
+        jTextFieldEmail.setText("");
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,7 +147,6 @@ public class ViewCadastro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro do usuário");
-        setPreferredSize(new java.awt.Dimension(406, 500));
         setResizable(false);
 
         jPanelPrincipal.setBackground(new java.awt.Color(50, 0, 130));
@@ -255,11 +257,6 @@ public class ViewCadastro extends javax.swing.JFrame {
         jLabelFebreDias.setText("Você sente febre a quantos dias?");
 
         jComboBoxInchacoArticulacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim, leve", "Sim, intensa" }));
-        jComboBoxInchacoArticulacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxInchacoArticulacaoActionPerformed(evt);
-            }
-        });
 
         jButtonSalvar.setBackground(new java.awt.Color(255, 255, 255));
         jButtonSalvar.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -276,11 +273,6 @@ public class ViewCadastro extends javax.swing.JFrame {
 
         jComboBoxSubfebril.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0 dias", "1 dia", "2 dias" }));
         jComboBoxSubfebril.setEnabled(false);
-        jComboBoxSubfebril.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxSubfebrilActionPerformed(evt);
-            }
-        });
 
         jLabelInchacoArticulacao.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelInchacoArticulacao.setForeground(new java.awt.Color(255, 255, 255));
@@ -288,121 +280,66 @@ public class ViewCadastro extends javax.swing.JFrame {
 
         jComboBoxFebreDias.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0 dias", "1 dia", "2 dias", "3 dias", "4 dias", "5 dias", "6 dias", "7 dias" }));
         jComboBoxFebreDias.setEnabled(false);
-        jComboBoxFebreDias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFebreDiasActionPerformed(evt);
-            }
-        });
 
         jLabelFebre.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelFebre.setForeground(new java.awt.Color(255, 255, 255));
         jLabelFebre.setText("Você sente febre?");
 
         jComboBoxDorArticulacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim, leve", "Sim, moderada", "Sim, intensa" }));
-        jComboBoxDorArticulacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDorArticulacaoActionPerformed(evt);
-            }
-        });
 
         jLabelDorDeCabeca.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelDorDeCabeca.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDorDeCabeca.setText("Você sente dor de cabeça?");
 
         jComboBoxInchacoGarganta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim, leve", "Sim, moderada", "Sim, intensa" }));
-        jComboBoxInchacoGarganta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxInchacoGargantaActionPerformed(evt);
-            }
-        });
 
         jLabelCoceira.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelCoceira.setForeground(new java.awt.Color(255, 255, 255));
         jLabelCoceira.setText("Você sente coceira?");
 
         jComboBoxCoceira.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim, leve", "Sim, moderada", "Sim, intensa" }));
-        jComboBoxCoceira.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxCoceiraActionPerformed(evt);
-            }
-        });
 
         jLabelInchacoGarganta1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelInchacoGarganta1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelInchacoGarganta1.setText("Você apresenta inchaço na garganta?");
 
         jComboBoxDorDeCabeca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim, moderada", "Sim, intensa" }));
-        jComboBoxDorDeCabeca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDorDeCabecaActionPerformed(evt);
-            }
-        });
 
         jLabelFaltaApetite.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelFaltaApetite.setForeground(new java.awt.Color(255, 255, 255));
         jLabelFaltaApetite.setText("Você apresenta falta de apetite?");
 
         jComboBoxManchaPele.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
-        jComboBoxManchaPele.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxManchaPeleActionPerformed(evt);
-            }
-        });
 
         jLabelManchaPele.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelManchaPele.setForeground(new java.awt.Color(255, 255, 255));
         jLabelManchaPele.setText("Você apresenta manchas na pele?");
 
         jComboBoxDorCorpo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
-        jComboBoxDorCorpo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDorCorpoActionPerformed(evt);
-            }
-        });
 
         jLabelDorCorpo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelDorCorpo.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDorCorpo.setText("Você sente dor no corpo?");
 
         jComboBoxNauseaVomito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
-        jComboBoxNauseaVomito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxNauseaVomitoActionPerformed(evt);
-            }
-        });
 
         jLabelNauseaVomito.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelNauseaVomito.setForeground(new java.awt.Color(255, 255, 255));
         jLabelNauseaVomito.setText("Você apresenta náuseas ou vômitos?");
 
         jComboBoxDorMuscular.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
-        jComboBoxDorMuscular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDorMuscularActionPerformed(evt);
-            }
-        });
 
         jLabelDorMuscular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelDorMuscular.setForeground(new java.awt.Color(255, 255, 255));
         jLabelDorMuscular.setText("Você apresenta dor muscular?");
 
         jComboBoxFaltaApetite.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
-        jComboBoxFaltaApetite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFaltaApetiteActionPerformed(evt);
-            }
-        });
 
         jLabelConjuntivite.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelConjuntivite.setForeground(new java.awt.Color(255, 255, 255));
         jLabelConjuntivite.setText("Você apresenta conjuntivite?");
 
         jComboBoxConjuntivite.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
-        jComboBoxConjuntivite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxConjuntiviteActionPerformed(evt);
-            }
-        });
 
         jComboBoxTremores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
 
@@ -411,33 +348,18 @@ public class ViewCadastro extends javax.swing.JFrame {
         jLabelCalafrios.setText("Você apresenta calafrios?");
 
         jComboBoxCalafrios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
-        jComboBoxCalafrios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxCalafriosActionPerformed(evt);
-            }
-        });
 
         jLabelTremores.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelTremores.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTremores.setText("Você apresenta tremores?");
 
         jComboBoxFadigaFraqueza.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
-        jComboBoxFadigaFraqueza.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFadigaFraquezaActionPerformed(evt);
-            }
-        });
 
         jLabelFadigaFraqueza.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelFadigaFraqueza.setForeground(new java.awt.Color(255, 255, 255));
         jLabelFadigaFraqueza.setText("Você apresenta fadiga ou fraqueza?");
 
         jComboBoxSudorese.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim" }));
-        jComboBoxSudorese.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxSudoreseActionPerformed(evt);
-            }
-        });
 
         jLabelSudorese.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabelSudorese.setForeground(new java.awt.Color(255, 255, 255));
@@ -447,7 +369,7 @@ public class ViewCadastro extends javax.swing.JFrame {
         jLabelSubFebril.setForeground(new java.awt.Color(255, 255, 255));
         jLabelSubFebril.setText("A quantos dias você apresenta o estado subfebriel?");
 
-        jComboBoxFebre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim, leve", "Sim, moderada" }));
+        jComboBoxFebre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Não", "Sim, porem leve", "Sim" }));
         jComboBoxFebre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxFebreActionPerformed(evt);
@@ -612,77 +534,48 @@ public class ViewCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        getSintomas();
-        ControleCadastro c = new ControleCadastro();
-        c.executaProLog(sintomas);
+        if (jComboBoxFebre.getSelectedItem().toString().equals("Não") && 
+                jComboBoxDorArticulacao.getSelectedItem().toString().equals("Não") && 
+                jComboBoxInchacoArticulacao.getSelectedItem().toString().equals("Não") && 
+                jComboBoxInchacoGarganta.getSelectedItem().toString().equals("Não") && 
+                jComboBoxDorDeCabeca.getSelectedItem().toString().equals("Não") && 
+                jComboBoxManchaPele.getSelectedItem().toString().equals("Não") && 
+                jComboBoxDorCorpo.getSelectedItem().toString().equals("Não") && 
+                jComboBoxNauseaVomito.getSelectedItem().toString().equals("Não") && 
+                jComboBoxDorMuscular.getSelectedItem().toString().equals("Não") && 
+                jComboBoxFaltaApetite.getSelectedItem().toString().equals("Não") && 
+                jComboBoxConjuntivite.getSelectedItem().toString().equals("Não") && 
+                jComboBoxCalafrios.getSelectedItem().toString().equals("Não") && 
+                jComboBoxTremores.getSelectedItem().toString().equals("Não") && 
+                jComboBoxFadigaFraqueza.getSelectedItem().toString().equals("Não") && 
+                jComboBoxSudorese.getSelectedItem().toString().equals("Não")) {
+            diagnostico = "";
+        } else {
+            getSintomas();
+            ControleCadastro c = new ControleCadastro();
+            Map<String, Term>[] retornoDiagnostico = c.executaProLog(sintomas);
+            for (int i = 0; i < retornoDiagnostico.length; i++) {
+                if (i == (retornoDiagnostico.length - 1)) {
+                    diagnostico += retornoDiagnostico[i].get("Lista").toString() + ".";
+                } else {
+                    diagnostico += retornoDiagnostico[i].get("Lista").toString() + ", ";
+                }
+            }
+            validaCampos();
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
-    private void jComboBoxInchacoArticulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInchacoArticulacaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxInchacoArticulacaoActionPerformed
-
-    private void jComboBoxSubfebrilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSubfebrilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxSubfebrilActionPerformed
-
-    private void jComboBoxFebreDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFebreDiasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxFebreDiasActionPerformed
-
-    private void jComboBoxDorArticulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDorArticulacaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDorArticulacaoActionPerformed
-
-    private void jComboBoxInchacoGargantaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInchacoGargantaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxInchacoGargantaActionPerformed
-
-    private void jComboBoxCoceiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCoceiraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxCoceiraActionPerformed
-
-    private void jComboBoxDorDeCabecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDorDeCabecaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDorDeCabecaActionPerformed
-
-    private void jComboBoxManchaPeleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxManchaPeleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxManchaPeleActionPerformed
-
-    private void jComboBoxDorCorpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDorCorpoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDorCorpoActionPerformed
-
-    private void jComboBoxNauseaVomitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNauseaVomitoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxNauseaVomitoActionPerformed
-
-    private void jComboBoxDorMuscularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDorMuscularActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDorMuscularActionPerformed
-
-    private void jComboBoxFaltaApetiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFaltaApetiteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxFaltaApetiteActionPerformed
-
-    private void jComboBoxConjuntiviteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxConjuntiviteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxConjuntiviteActionPerformed
-
-    private void jComboBoxCalafriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCalafriosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxCalafriosActionPerformed
-
-    private void jComboBoxFadigaFraquezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFadigaFraquezaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxFadigaFraquezaActionPerformed
-
-    private void jComboBoxSudoreseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSudoreseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxSudoreseActionPerformed
-
     private void jComboBoxFebreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFebreActionPerformed
-        // TODO add your handling code here:
+        if (jComboBoxFebre.getSelectedItem().toString().equals("Sim, porem leve")) {
+            jComboBoxSubfebril.setEnabled(true);
+            jComboBoxFebreDias.setEnabled(false);
+        } else if (jComboBoxFebre.getSelectedItem().toString().equals("Sim")) {
+            jComboBoxSubfebril.setEnabled(false);
+            jComboBoxFebreDias.setEnabled(true);
+        } else {
+            jComboBoxSubfebril.setEnabled(false);
+            jComboBoxFebreDias.setEnabled(false);
+        }
     }//GEN-LAST:event_jComboBoxFebreActionPerformed
 
     /**

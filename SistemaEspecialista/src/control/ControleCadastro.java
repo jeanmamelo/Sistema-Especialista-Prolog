@@ -19,6 +19,9 @@ public class ControleCadastro {
         objCadastro = new Cadastro(nome, endereco, cidade, celular, email, diagnostico); //Gera um objeto modelCadastro do tipo Cliente que recebe as informações do usuário
         
         Banco.getBanco().add(objCadastro); // Adiciona as informaçoes do usuário na lista (Banco de Dados)
+        
+        System.out.println("Nome: " + nome + "Endereço: " + endereco + "Cidade: " + cidade + "Celular: " + 
+                celular + "E-mail: " + email + "Diagnostico: " + diagnostico);
     }
         
     public ArrayList<Integer> procurarPeloNome(String nome, ArrayList<Cadastro> banco) {
@@ -33,7 +36,7 @@ public class ControleCadastro {
         return itens; //retorna o indice em que o nome esta
     } 
     
-    public void executaProLog(ArrayList<String> sintomas){
+    public Map<String, Term>[] executaProLog(ArrayList<String> sintomas){
         String listaSintoma = criaListaProlog(sintomas);
         
         String c1="consult('sistemaEspecialista.pl')";
@@ -45,6 +48,7 @@ public class ControleCadastro {
         for(int i = 0; i<doencas.length; i++){
             System.out.println("Voce tem: "+ doencas[i].get("Lista"));
         }
+        return doencas;
     }
     public String criaListaProlog(ArrayList<String> sintomas){
         String lista = new String();
@@ -307,7 +311,7 @@ public class ControleCadastro {
             } 
         }
         tail = tail+"]";
-        lista = "[null|"+tail+"]";
+        lista = "[padrao|"+tail+"]";
         return lista;
     }
 }  

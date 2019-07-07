@@ -1,4 +1,4 @@
-﻿% febre(X), onde X = dias que est� com febre
+﻿% febre(X), onde X = dias que esta com febre
 
 febre(1).
 febre(2).
@@ -12,16 +12,16 @@ febre(7).
 % febre(X), onde X = tipo da febre
 
 febre(terca).
- %ter��
+ %terca
 febre(quarta).
- %quart�
+ %quarta
 
 % subfebril(X), onde X = dias que encontra-se subfebril
 subFebril(1).
 subFebril(2).
 
 
-% dorArticulacao(X), onde X = intensidade da dor na articula��o
+% dorArticulacao(X), onde X = intensidade da dor na articulacao
 
 dorArticulacao(leve).
 dorArticulacao(moderada).
@@ -45,9 +45,9 @@ hipertrofia(intensa).
 dorCabeca(intensa).
 
 %sintoma padrao para facilitar o codgo
-sintoma(null);                                  
+sintoma(padrao).                                 
 
-% classifica��o dos sintomas
+% classificao dos sintomas
 
 sintoma(febre(1)).
 sintoma(febre(2)).
@@ -108,7 +108,7 @@ sintoma(conjutivite).
 
 % associa��o dos sintomas com as doen�as
 
-doenca(dengue, null);
+doenca(dengue, padrao).
 
 doenca(dengue, febre(X)) :- 
  
@@ -122,20 +122,20 @@ doenca(dengue, dorMuscular).
 
 doenca(dengue, dorArticulacao(leve)).
 
-doenca(dengue, dorCabeca(intensa).
+doenca(dengue, dorCabeca(intensa)).
 
 doenca(dengue, coceira(leve)).
 
 doenca(dengue, hipertrofia(leve)).
 
 
-doenca(zika, subfebril(X)) :-
+doenca(zika, subFebril(X)) :-
  
-   sintoma(subfebril(X)),
+   sintoma(subFebril(X)),
 
     X =< 2.
 
-doenca(zika, null);
+doenca(zika, padrao).
 
 doenca(zika, manchaPele).
 
@@ -164,7 +164,7 @@ doenca(chikungunya, febre(X)) :-
     sintoma(febre(X)),
 
     X =< 3.
-doenca(chikungunya, null);
+doenca(chikungunya, padrao).
 
 doenca(chikungunya, manchaPele).
 
@@ -184,7 +184,7 @@ doenca(chikungunya, hipertrofia(moderada)).
 doenca(chikungunya, dorCabeca(moderada)).
 
 
-doenca(febreAmarela, null);
+doenca(febreAmarela, padrao).
 
 doenca(febreAmarela, febre).
 
@@ -199,7 +199,7 @@ doenca(febreAmarela, dorCorpo).
 doenca(febreAmarela, calafrios).
 
 
-doenca(malaria, null);
+doenca(malaria, padrao).
 
 doenca(malaria, febre).
 
@@ -219,7 +219,7 @@ doenca(malaria, nauseaVomito).
 
 
 encontraDoenca(ListaSintomas, Lista) :- 
-   findall(Doenca, buscaNull(ListaSintomas, Doenca), Lista).
+   findall(Doenca, buscapadrao(ListaSintomas, Doenca), Lista).
 
 
 
@@ -242,7 +242,7 @@ retornaDoenca(ListaSintomas, Doenca) :-
     retornaDoenca(TailListaSintomas, Doenca).
 
 
-buscaNull(ListaSintomas, Doenca):-
+buscapadrao(ListaSintomas, Doenca):-
 
     splitVetor(HeadListaSintomas,_,ListaSintomas),
 
