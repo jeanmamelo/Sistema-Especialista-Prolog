@@ -114,7 +114,7 @@ public class ControleCadastro {
                 tail = tail+", subFebril(1)";
             } 
         }
-        if(sintomas.get(0).equals("2 dias")){
+        if(sintomas.get(1).equals("2 dias")){
             if(cont == 0){
                 tail = tail+"subFebril(2)";
                 cont++;
@@ -125,7 +125,7 @@ public class ControleCadastro {
         
         
         tail = tail+"]";
-        lista = "[febre(3)|"+tail+"]";
+        lista = "[null|"+tail+"]";
         return lista;
     }
 }  
