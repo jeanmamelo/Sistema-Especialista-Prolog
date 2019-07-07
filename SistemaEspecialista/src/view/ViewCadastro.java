@@ -2,6 +2,7 @@ package view;
 
 import control.ControleCadastro;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -10,10 +11,32 @@ import javax.swing.JOptionPane;
  */
 public class ViewCadastro extends javax.swing.JFrame {
     ControleCadastro controleCadastro = new ControleCadastro();
+    ArrayList<String> sintomas = new ArrayList();
     
     
     public ViewCadastro() {
         initComponents();
+    }
+    
+    public void getSintomas(){
+        
+        sintomas.add(jComboBoxFebreDias.getSelectedItem().toString());
+        sintomas.add(jComboBoxSubfebril.getSelectedItem().toString());
+        sintomas.add(jComboBoxDorArticulacao.getSelectedItem().toString());
+        sintomas.add(jComboBoxInchacoArticulacao.getSelectedItem().toString());
+        sintomas.add(jComboBoxCoceira.getSelectedItem().toString());
+        sintomas.add(jComboBoxInchacoGarganta.getSelectedItem().toString());
+        sintomas.add(jComboBoxDorDeCabeca.getSelectedItem().toString());
+        sintomas.add(jComboBoxManchaPele.getSelectedItem().toString());
+        sintomas.add(jComboBoxDorCorpo.getSelectedItem().toString());
+        sintomas.add(jComboBoxNauseaVomito.getSelectedItem().toString());
+        sintomas.add(jComboBoxDorMuscular.getSelectedItem().toString());
+        sintomas.add(jComboBoxFaltaApetite.getSelectedItem().toString());
+        sintomas.add(jComboBoxConjuntivite.getSelectedItem().toString());        
+        sintomas.add(jComboBoxCalafrios.getSelectedItem().toString());
+        sintomas.add(jComboBoxTremores.getSelectedItem().toString());
+        sintomas.add(jComboBoxFadigaFraqueza.getSelectedItem().toString());   
+        sintomas.add(jComboBoxSudorese.getSelectedItem().toString());     
     }
     
     private void validaCampos() {
@@ -590,6 +613,8 @@ public class ViewCadastro extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         getSintomas();
+        ControleCadastro c = new ControleCadastro();
+        c.executaProLog(sintomas);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jComboBoxInchacoArticulacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxInchacoArticulacaoActionPerformed
@@ -660,13 +685,6 @@ public class ViewCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxFebreActionPerformed
 
-    public void getSintomas(){
-        String sintoma;
-        
-        sintoma = jComboBoxInchacoArticulacao.getSelectedItem().toString();
-        System.out.println(sintoma);
-        
-    }
     /**
      * @param args the command line arguments
      */
